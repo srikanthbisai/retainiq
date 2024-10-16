@@ -4,6 +4,7 @@ import { FaFan, FaTrash, FaArrowLeft, FaEdit } from "react-icons/fa";
 import { HiOutlinePhotograph, HiShoppingBag } from "react-icons/hi";
 import { BsInfinity } from "react-icons/bs";
 import { PiDotsNineBold } from "react-icons/pi";
+import Image from 'next/image'; // Import Next.js Image component
 
 interface FilterItem {
   text: string;
@@ -85,7 +86,7 @@ const StateTable: React.FC = () => {
     dragOverItem.current = position;
   };
 
-  const handleDragEnd = (e: React.DragEvent<HTMLDivElement>) => {
+  const handleDragEnd = () => {
     if (dragItem.current !== null && dragOverItem.current !== null) {
       const copyStates = [...states];
       const dragItemContent = copyStates[dragItem.current];
@@ -155,11 +156,11 @@ const StateTable: React.FC = () => {
           {/* Left section: Numbers and Filters */}
           <div className="left w-[40%] flex">
             {/* Numbers Column */}
-            <div className="left-left numbersColumn w-[40%] pt-20 pb-10">
+            <div className="left-left numbersColumn w-[40%] pt-20 pb-10 space-y-2">
               {states.map((state, index) => (
                 <div
                   key={state.id}
-                  className="h-40 flex flex-col items-center justify-center cursor-move"
+                  className="h-40 flex flex-col items-center justify-center cursor-move "
                   draggable
                   onDragStart={(e) => handleDragStart(e, index)}
                   onDragEnter={(e) => handleDragEnter(e, index)}
@@ -213,7 +214,7 @@ const StateTable: React.FC = () => {
               }}
             >
               {/* Header Row */}
-              <div className="flex mb-2 mt-8" style={{ width: `${columns * 200}px` }}>
+              <div className="flex mb-2 mt-8 text-center items-center justify-center" style={{ width: `${columns * 200}px` }}>
                 {Array.from({ length: columns }).map((_, index) => (
                   <div key={index} className="flex items-center gap-3 p-2 w-[200px]">
                     <h1 className="text-gray-700">{index === 0 ? 'Primary' : `Variant ${index + 1}`}</h1>
@@ -233,11 +234,14 @@ const StateTable: React.FC = () => {
                       >
                         {variant ? (
                           <>
-                            <img src={variant.image} alt={variant.title} className="w-full h-full object-cover" />
+                            <Image src={variant.image} alt={variant.title} layout="fill" objectFit="cover" />
                             <div className="absolute bottom-0 left-0 right-0 bg-white bg-opacity-75 p-2 text-xs">
                               {variant.title}
                             </div>
-                            <button className="absolute top-2 right-2 bg-white rounded-full p-1 shadow-md">
+                            <button 
+                              className="absolute top-2 right-2 bg-white rounded-full p-1 shadow-md"
+                              onClick={() => addDesign(state.id, variantIndex)}
+                            >
                               <FaEdit className="text-gray-600" />
                             </button>
                           </>
@@ -255,12 +259,9 @@ const StateTable: React.FC = () => {
                 ))}
               </div>
             </div>
-          </div>
 
-          {/* Plus Signs Section */}
-          <div className="flex flex-col justify-evenly items-center w-[10%]">
-            <div className="h-40 flex items-center justify-center">
-              <h1 className="text-4xl bg-gray-100 cursor-pointer p-2 rounded" onClick={addVariantColumn}>+</h1>
+            <div className="flex justify-end mt-4">
+              <button onClick={addVariantColumn} className="bg-blue-500 text-white p-2 rounded-md">+ Add Variant Column</button>
             </div>
           </div>
         </div>
