@@ -91,7 +91,7 @@ const StateTable: React.FC = () => {
             </div>
 
             {/* Vertical divider */}
-            <div className="w-px bg-gray-300 mx-2"></div>
+            <div className="w-px bg-gray-100 mx-2"></div>
 
             {/* Filters Column */}
             <div className="left-right FiltersColumn w-full mt-10 space-y-2 pl-4">
@@ -130,7 +130,7 @@ const StateTable: React.FC = () => {
           </div>
 
           {/* Vertical divider */}
-          <div className="w-px bg-gray-300 mx-2"></div>
+          <div className="w-px bg-gray-100 mx-2"></div>
 
           {/* Grid Layout with Scrollbar*/}
           <div className="right w-[50%] overflow-hidden">
@@ -171,9 +171,7 @@ const StateTable: React.FC = () => {
                         />
                       )}
                     </div>
-                    {index < columns - 1 && (
-                      <div className="w-px bg-gray-300 h-8"></div>
-                    )}
+                    
                   </React.Fragment>
                 ))}
               </div>
@@ -209,9 +207,6 @@ const StateTable: React.FC = () => {
                             </button>
                           )}
                         </div>
-                        {variantIndex < columns - 1 && (
-                          <div className="w-px bg-gray-300"></div>
-                        )}
                       </React.Fragment>
                     ))}
                   </div>
@@ -221,7 +216,7 @@ const StateTable: React.FC = () => {
           </div>
 
           {/* Vertical divider */}
-          <div className="w-px bg-gray-300 mx-2"></div>
+          <div className="w-px bg-gray-100 mx-2"></div>
 
           {/* Add Column Section */}
           <div className="flex flex-col justify-start items-center w-[10%] pt-20">
