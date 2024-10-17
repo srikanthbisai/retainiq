@@ -53,7 +53,7 @@ export const useStateTable = () => {
     }
   }, [columns]);
 
-  const addState = () => {
+  const addState = () => {                       //function to add new row
     const newState: State = {
       id: states.length + 1,
       filter: [{ text: "New Filter", type: "condition" }],
@@ -62,12 +62,12 @@ export const useStateTable = () => {
     setStates([...states, newState]);
   };
 
-  const deleteState = (id: number) => {
+  const deleteState = (id: number) => {                   //function to delete row and update the state with remaining rows
     setStates(states.filter((state) => state.id !== id));
     setSelectedRow(null);
   };
 
-  const addVariantColumn = () => {
+  const addVariantColumn = () => {          //function to add new column
     setColumns((prev) => prev + 1);
     setStates(
       states.map((state) => ({
@@ -77,7 +77,7 @@ export const useStateTable = () => {
     );
   };
 
-  const deleteVariantColumn = (index: number) => {
+  const deleteVariantColumn = (index: number) => {      //function to delete column and update the state with remaining columns
     if (index === 0 || index >= columns) return; 
     setColumns((prev) => prev - 1);
     setStates(
@@ -109,7 +109,7 @@ export const useStateTable = () => {
     }
   };
 
-  const addDesign = (stateId: number, variantIndex: number) => {
+  const addDesign = (stateId: number, variantIndex: number) => {       //function to upload images into the columns of any row
     const input = document.createElement("input");
     input.type = "file";
     input.accept = "image/*";
