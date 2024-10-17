@@ -5,7 +5,7 @@ import { HiOutlinePhotograph, HiShoppingBag } from "react-icons/hi";
 import { BsInfinity } from "react-icons/bs";
 import { PiDotsNineBold } from "react-icons/pi";
 import Image from "next/image";
-import { useStateTable } from "../hooks/useStateTable";
+import { useStateTable } from "../hooks/useStateTable"; 
 
 const StateTable: React.FC = () => {
   const {

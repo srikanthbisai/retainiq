@@ -130,7 +130,7 @@ export const useStateTable = () => {
     const lines: string[] = [];
     let currentLine = "";
 
-    filter.forEach((item, index) => {
+    filter.forEach((item) => {
       if (item.type === "condition" && currentLine !== "") {
         lines.push(currentLine.trim());
         currentLine = "";
