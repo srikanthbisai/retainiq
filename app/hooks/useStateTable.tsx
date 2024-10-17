@@ -21,8 +21,8 @@ export const useStateTable = () => {
     {
       id: 1,
       filter: [
-        { text: "image_list.Product Image 2", type: "condition" },
-        { text: "is empty", type: "operator" },
+        { text: "image_list.ProductImage2", type: "condition" },
+        { text: "isEmpty", type: "operator" },
         { text: "AND Discount Percentage", type: "condition" },
         { text: "is", type: "operator" },
         { text: "0", type: "value" },
@@ -159,21 +159,8 @@ export const useStateTable = () => {
   };
 
   return {
-    states,
-    columns,
-    selectedRow,
-    selectedColumn,
-    gridRef,
-    addState,
-    deleteState,
-    addVariantColumn,
-    deleteVariantColumn,
-    handleDragStart,
-    handleDragEnter,
-    handleDragEnd,
-    addDesign,
-    renderFilterContent,
-    setSelectedRow,
+    states, columns, selectedRow, selectedColumn, gridRef, addState, deleteState,  addVariantColumn, deleteVariantColumn,
+    handleDragStart, handleDragEnter, handleDragEnd, addDesign, renderFilterContent, setSelectedRow,
     setSelectedColumn,
   };
 };

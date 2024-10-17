@@ -13,23 +13,9 @@ import { TbCarFan } from "react-icons/tb";
 
 const StateTable: React.FC = () => {
   const {
-    states,
-    columns,
-    selectedRow,
-    selectedColumn,
-    gridRef,
-    addState,
-    deleteState,
-    addVariantColumn,
-    deleteVariantColumn,
-    handleDragStart,
-    handleDragEnter,
-    handleDragEnd,
-    addDesign,
-    renderFilterContent,
-    setSelectedRow,
-    setSelectedColumn,
-  } = useStateTable();
+    states,  columns,  selectedRow, selectedColumn, gridRef, addState, deleteState, addVariantColumn,
+    deleteVariantColumn, handleDragStart,  handleDragEnter,  handleDragEnd,  addDesign,  renderFilterContent,
+    setSelectedRow, setSelectedColumn, } = useStateTable();
 
   return (
     <div className="main min-h-screen flex w-full">
@@ -126,11 +112,11 @@ const StateTable: React.FC = () => {
                 ${
                   state.filter.find((item) => item.text === word)?.type ===
                   "condition"
-                    ? "bg-blue-100 text-blue-800"
+                    ? "border border-gray-200 text-gray-700"
                     : state.filter.find((item) => item.text === word)?.type ===
                       "operator"
-                    ? "bg-green-100 text-green-800"
-                    : " text-yellow-800"
+                    ? "bg-green-100 text-green-800 "
+                    : " text-gray-700 border border-gray-200"
                 }`}
                         >
                           {word}
@@ -146,7 +132,7 @@ const StateTable: React.FC = () => {
           {/* Vertical divider */}
           <div className="w-px bg-gray-300 mx-2"></div>
 
-          {/* Right section: Grid Layout with Scrollbar */}
+          {/* Grid Layout with Scrollbar*/}
           <div className="right w-[50%] overflow-hidden">
             <div
               ref={gridRef}
