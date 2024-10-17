@@ -1,27 +1,30 @@
-"use client";
+"use client"
 import React from "react";
 import { FaFan, FaTrash, FaArrowLeft, FaEdit } from "react-icons/fa";
 import { HiOutlinePhotograph, HiShoppingBag } from "react-icons/hi";
 import { BsInfinity } from "react-icons/bs";
 import { PiDotsNineBold } from "react-icons/pi";
 import Image from "next/image";
-import { useStateTable } from "../hooks/useStateTable"; 
+import { useStateTable } from "../hooks/useStateTable"; // Adjust this import path as needed
 
 const StateTable: React.FC = () => {
   const {
     states,
     columns,
     selectedRow,
+    selectedColumn,
     gridRef,
     addState,
     deleteState,
     addVariantColumn,
+    deleteVariantColumn,
     handleDragStart,
     handleDragEnter,
     handleDragEnd,
     addDesign,
     renderFilterContent,
     setSelectedRow,
+    setSelectedColumn,
   } = useStateTable();
 
   return (
@@ -42,11 +45,16 @@ const StateTable: React.FC = () => {
 
       <div className="right w-[95%]">
         {/* Header */}
-        <div className="h-20 w-full bg-black"></div>
+        <div className="w-full h-20 bg-black"></div>
         <div className="nav w-full p-10 text-3xl justify-between flex">
           <div className="left flex gap-10">
             <FaArrowLeft />
-            <h1>Rules Creation</h1>
+            <div className="flex flex-col gap-2">
+              <h1 className="font-medium font-serif text-4xl">
+                Rules creation
+              </h1>
+              <div className="w-[250%] h-[2px] bg-gray-700 self-start"></div>
+            </div>
           </div>
           <button className="bg-green-600 text-white text-sm p-4 rounded-md">
             Publish Feed
@@ -61,7 +69,7 @@ const StateTable: React.FC = () => {
               {states.map((state, index) => (
                 <div
                   key={state.id}
-                  className="h-40 flex flex-col items-center justify-center cursor-move"
+                  className="h-40 flex flex-col items-center justify-center text-center cursor-move"
                   draggable
                   onDragStart={() => handleDragStart(index)}
                   onDragEnter={() => handleDragEnter(index)}
@@ -71,12 +79,12 @@ const StateTable: React.FC = () => {
                 >
                   {selectedRow === index && (
                     <FaTrash
-                      className="text-red-500 cursor-pointer mb-2"
+                      className="text-red-500 cursor-pointer mb-2 font-bold"
                       onClick={() => deleteState(state.id)}
                     />
                   )}
                   <div className="flex items-center justify-center">
-                    <span className="mr-2 text-2xl">{index + 1}</span>
+                    <span className="mr-2 text-2xl font-bold">{index + 1}</span>
                     <PiDotsNineBold className="text-2xl" />
                   </div>
                 </div>
@@ -146,11 +154,25 @@ const StateTable: React.FC = () => {
               >
                 {Array.from({ length: columns }).map((_, index) => (
                   <React.Fragment key={index}>
-                    <div className="flex items-center gap-3 p-2 w-[200px]">
-                      <h1 className="text-gray-700">
-                        {index === 0 ? "Primary" : `Variant ${index + 1}`}
-                      </h1>
-                      <PiDotsNineBold className="text-gray-500" />
+                    <div 
+                      className="flex items-center justify-between p-2 w-[200px]"
+                      onClick={() => setSelectedColumn(index)}
+                    >
+                      <div className="flex items-center gap-3">
+                        <h1 className="text-gray-700">
+                          {index === 0 ? "Primary" : `Variant ${index + 1}`}
+                        </h1>
+                        <PiDotsNineBold className="text-gray-500" />
+                      </div>
+                      {selectedColumn === index && index > 0 && (
+                        <FaTrash
+                          className="text-red-500 cursor-pointer"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            deleteVariantColumn(index);
+                          }}
+                        />
+                      )}
                     </div>
                     {index < columns - 1 && (
                       <div className="w-px bg-gray-300 h-8"></div>
@@ -167,9 +189,7 @@ const StateTable: React.FC = () => {
                   <div key={state.id} className="flex gap-2 mb-2 rounded-md">
                     {state.variants.map((variant, variantIndex) => (
                       <React.Fragment key={variantIndex}>
-                        <div
-                          className="w-[200px] h-40 flex flex-col items-center justify-center bg-white relative rounded-md"
-                        >
+                        <div className="w-[200px] h-40 flex flex-col items-center justify-center bg-white relative rounded-md">
                           {variant ? (
                             <>
                               <Image

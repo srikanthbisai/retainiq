@@ -45,6 +45,7 @@ export const useStateTable = () => {
   const dragOverItem = useRef<number | null>(null);
   const gridRef = useRef<HTMLDivElement | null>(null);
   const [selectedRow, setSelectedRow] = useState<number | null>(null);
+  const [selectedColumn, setSelectedColumn] = useState<number | null>(null);
 
   useEffect(() => {
     if (gridRef.current) {
@@ -74,6 +75,18 @@ export const useStateTable = () => {
         variants: [...state.variants, null],
       }))
     );
+  };
+
+  const deleteVariantColumn = (index: number) => {
+    if (index === 0 || index >= columns) return; // Don't delete primary column or non-existent columns
+    setColumns((prev) => prev - 1);
+    setStates(
+      states.map((state) => ({
+        ...state,
+        variants: state.variants.filter((_, i) => i !== index),
+      }))
+    );
+    setSelectedColumn(null);
   };
 
   const handleDragStart = (position: number) => {
@@ -149,15 +162,18 @@ export const useStateTable = () => {
     states,
     columns,
     selectedRow,
+    selectedColumn,
     gridRef,
     addState,
     deleteState,
     addVariantColumn,
+    deleteVariantColumn,
     handleDragStart,
     handleDragEnter,
     handleDragEnd,
     addDesign,
     renderFilterContent,
     setSelectedRow,
+    setSelectedColumn,
   };
 };
