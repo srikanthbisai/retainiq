@@ -33,6 +33,8 @@ const StateTable: React.FC = () => {
 
   const [hoveredCell, setHoveredCell] = useState<{ row: number; col: number } | null>(null);
 
+  const showScrollbar = columns > 4;
+
   return (
     <div className="main min-h-screen flex w-full">
       {/* Sidebar */}
@@ -152,16 +154,16 @@ const StateTable: React.FC = () => {
           <div className="right w-[50%] overflow-hidden">
             <div
               ref={gridRef}
-              className="overflow-x-auto"
+              className={`overflow-x-auto ${showScrollbar ? 'pb-4' : ''}`}
               style={{
                 maxWidth: "800px",
-                overflowX: columns > 4 ? "scroll" : "hidden",
+                overflowX: showScrollbar ? "scroll" : "hidden",
               }}
             >
               {/* Header Row */}
               <div
                 className="flex mb-2 mt-8"
-                style={{ width: `${columns * 200}px` }}
+                style={{ width: `${columns * 200}px`, minWidth: '400px' }}
               >
                 {Array.from({ length: columns }).map((_, index) => (
                   <React.Fragment key={index}>
@@ -192,7 +194,7 @@ const StateTable: React.FC = () => {
               </div>
 
               {/* Grid Items */}
-              <div style={{ width: `${columns * 200}px`, borderRadius: "10px" }}>
+              <div style={{ width: `${columns * 200}px`, minWidth: '400px', borderRadius: "10px" }}>
                 {states.map((state, rowIndex) => (
                   <div key={state.id} className="flex gap-2 mb-2 rounded-md">
                     {state.variants.map((variant, colIndex) => (
