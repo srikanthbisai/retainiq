@@ -1,12 +1,12 @@
-"use client"
+"use client";
 import React from "react";
-import { FaFan,  FaArrowLeft, FaEdit } from "react-icons/fa";
+import { FaFan, FaArrowLeft, FaEdit } from "react-icons/fa";
 import { HiOutlinePhotograph, HiShoppingBag } from "react-icons/hi";
 import { BsInfinity } from "react-icons/bs";
 import { PiDotsNineBold } from "react-icons/pi";
 import Image from "next/image";
 import { HiOutlineTrash } from "react-icons/hi2";
-import { useStateTable } from "../hooks/useStateTable"; // Adjust this import path as needed
+import { useStateTable } from "../hooks/useStateTable"; 
 import { BsThreeDotsVertical } from "react-icons/bs";
 
 const StateTable: React.FC = () => {
@@ -32,7 +32,10 @@ const StateTable: React.FC = () => {
   return (
     <div className="main min-h-screen flex w-full">
       {/* Sidebar */}
-      <div className="left w-[5%] bg-black flex flex-col items-center text-white justify-between text-2xl">
+      <div
+        className="left bg-black flex flex-col items-center text-white justify-between text-2xl"
+        style={{ width: "5%", height: "100vh", position: "fixed" }}
+      >
         <div className="top space-y-10">
           <FaFan className="mt-32 text-green-500" />
           <HiOutlinePhotograph />
@@ -45,16 +48,15 @@ const StateTable: React.FC = () => {
         </div>
       </div>
 
-      <div className="right w-[95%]">
+      {/* Main Content */}
+      <div className="right w-[95%] ml-[5%]">
         {/* Header */}
         <div className="w-full h-20 bg-black"></div>
-        <div className="nav w-full p-10 text-3xl justify-between flex">
+        <div className="nav w-full p-10 text-3xl flex justify-between">
           <div className="left flex gap-10">
             <FaArrowLeft />
             <div className="flex flex-col gap-2">
-              <h1 className="font-medium font-serif text-4xl">
-                Rules creation
-              </h1>
+              <h1 className="font-medium font-serif text-4xl">Rules creation</h1>
               <div className="w-[250%] h-[2px] bg-gray-700 self-start"></div>
             </div>
           </div>
@@ -76,7 +78,6 @@ const StateTable: React.FC = () => {
                   onDragEnd={handleDragEnd}
                   onDragOver={(e) => e.preventDefault()}
                   onClick={() => setSelectedRow(index)}
-
                 >
                   {selectedRow === index && (
                     <HiOutlineTrash
@@ -102,7 +103,7 @@ const StateTable: React.FC = () => {
             <div className="w-px bg-gray-300 mx-2"></div>
 
             {/* Filters Column */}
-            <div className="left-right FiltersColumn w-full mt-10 space-y-2 pl-4 ">
+            <div className="left-right FiltersColumn w-full mt-10 space-y-2 pl-4">
               <h1 className="text-gray-700 mb-4 text-center font-medium">Product Filter</h1>
               {states.map((state) => (
                 <div
@@ -155,7 +156,7 @@ const StateTable: React.FC = () => {
               >
                 {Array.from({ length: columns }).map((_, index) => (
                   <React.Fragment key={index}>
-                    <div 
+                    <div
                       className="flex items-center justify-center p-2 w-[200px]"
                       onClick={() => setSelectedColumn(index)}
                     >
@@ -206,8 +207,8 @@ const StateTable: React.FC = () => {
                             </>
                           ) : (
                             <button
-                              onClick={() => 
-                                addDesign(state.id, variantIndex)    
+                              onClick={() =>
+                                addDesign(state.id, variantIndex)
                               }
                               className="hover:bg-gray-200 text-gray-700 p-2 rounded border border-gray-300"
                             >
@@ -237,7 +238,7 @@ const StateTable: React.FC = () => {
                 className="h-40 flex items-center justify-center"
               >
                 <h1
-                  className="text-4xl bg-gray-100 cursor-pointer p-2 rounded"
+                  className="text-4xl bg-gray-100 rounded-full w-12 h-12 flex items-center justify-center cursor-pointer"
                   onClick={addVariantColumn}
                 >
                   +
