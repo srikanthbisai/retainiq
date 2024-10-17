@@ -78,15 +78,15 @@ const StateTable: React.FC = () => {
     })));
   };
 
-  const handleDragStart = (_: React.DragEvent<HTMLDivElement>, position: number) => {
+  const handleDragStart = (position: number) => {
     dragItem.current = position;
   };
 
-  const handleDragEnter = (_: React.DragEvent<HTMLDivElement>, position: number) => {
+  const handleDragEnter = (position: number) => {
     dragOverItem.current = position;
   };
 
-  const handleDragEnd = (_: React.DragEvent<HTMLDivElement>) => {
+  const handleDragEnd = () => {
     if (dragItem.current !== null && dragOverItem.current !== null) {
       const copyStates = [...states];
       const dragItemContent = copyStates[dragItem.current];
@@ -99,7 +99,6 @@ const StateTable: React.FC = () => {
   };
 
   const addDesign = (stateId: number, variantIndex: number) => {
-    // Simulate file selection
     const input = document.createElement('input');
     input.type = 'file';
     input.accept = 'image/*';
@@ -125,11 +124,11 @@ const StateTable: React.FC = () => {
   };
 
   return (
-    <div className="main min-h-screen flex w-full ">
+    <div className="main min-h-screen flex w-full">
       {/* Sidebar */}
       <div className="left w-[5%] bg-black flex flex-col items-center text-white justify-between text-2xl">
         <div className="top space-y-10">
-          <FaFan className=" mt-32 text-green-500" />
+          <FaFan className="mt-32 text-green-500" />
           <HiOutlinePhotograph />
           <BsInfinity />
           <HiShoppingBag />
@@ -152,7 +151,7 @@ const StateTable: React.FC = () => {
           </button>
         </div>
 
-        <div className="w-[90%] mx-auto bg-gray-200 rounded-lg flex gap-4">
+        <div className="w-[95%] mx-auto bg-gray-200 rounded-lg flex gap-4">
           {/* Left section: Numbers and Filters */}
           <div className="left w-[40%] flex">
             {/* Numbers Column */}
@@ -162,8 +161,8 @@ const StateTable: React.FC = () => {
                   key={state.id}
                   className="h-40 flex flex-col items-center justify-center cursor-move"
                   draggable
-                  onDragStart={(e) => handleDragStart(e, index)}
-                  onDragEnter={(e) => handleDragEnter(e, index)}
+                  onDragStart={() => handleDragStart(index)}
+                  onDragEnter={() => handleDragEnter(index)}
                   onDragEnd={handleDragEnd}
                   onDragOver={(e) => e.preventDefault()}
                 >
@@ -191,7 +190,7 @@ const StateTable: React.FC = () => {
                     <span 
                       key={i} 
                       className={`inline-block px-2 py-1 rounded-md mr-1 mb-1 text-xs font-medium
-                        ${item.type === 'condition' ? 'bg-blue-100 text-blue-800 ' : 
+                        ${item.type === 'condition' ? 'bg-blue-100 text-blue-800' : 
                           item.type === 'operator' ? 'bg-green-100 text-green-800' : 
                           'bg-yellow-100 text-yellow-800'}`}
                     >
@@ -224,7 +223,7 @@ const StateTable: React.FC = () => {
               </div>
 
               {/* Grid Items */}
-              <div style={{ width: `${columns * 200}px`, borderRadius:"10px" }}>
+              <div style={{ width: `${columns * 200}px`, borderRadius: "10px" }}>
                 {states.map((state) => (
                   <div key={state.id} className="flex gap-2 mb-2 rounded-md">
                     {state.variants.map((variant, variantIndex) => (
@@ -234,7 +233,7 @@ const StateTable: React.FC = () => {
                       >
                         {variant ? (
                           <>
-                            <Image src={variant.image} alt={variant.title} className="w-full h-full object-cover" />
+                            <Image src={variant.image} alt={variant.title} width={200} height={160} className="object-cover rounded-md" />
                             <div className="absolute bottom-0 left-0 right-0 bg-white bg-opacity-75 p-2 text-xs">
                               {variant.title}
                             </div>
