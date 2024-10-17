@@ -1,6 +1,6 @@
-"use client";
-import React from "react";
-import {  FaArrowLeft, FaEdit } from "react-icons/fa";
+"use client"
+import React, { useState } from "react";
+import { FaArrowLeft, FaEdit } from "react-icons/fa";
 import { HiOutlinePhotograph, HiShoppingBag } from "react-icons/hi";
 import { BsInfinity } from "react-icons/bs";
 import { PiDotsNineBold } from "react-icons/pi";
@@ -13,9 +13,25 @@ import { TbCarFan } from "react-icons/tb";
 
 const StateTable: React.FC = () => {
   const {
-    states,  columns,  selectedRow, selectedColumn, gridRef, addState, deleteState, addVariantColumn,
-    deleteVariantColumn, handleDragStart,  handleDragEnter,  handleDragEnd,  addDesign,  renderFilterContent,
-    setSelectedRow, setSelectedColumn, } = useStateTable();
+    states,
+    columns,
+    selectedRow,
+    selectedColumn,
+    gridRef,
+    addState,
+    deleteState,
+    addVariantColumn,
+    deleteVariantColumn,
+    handleDragStart,
+    handleDragEnter,
+    handleDragEnd,
+    addDesign,
+    renderFilterContent,
+    setSelectedRow,
+    setSelectedColumn,
+  } = useStateTable();
+
+  const [hoveredCell, setHoveredCell] = useState<{ row: number; col: number } | null>(null);
 
   return (
     <div className="main min-h-screen flex w-full">
@@ -171,43 +187,45 @@ const StateTable: React.FC = () => {
                         />
                       )}
                     </div>
-                    
                   </React.Fragment>
                 ))}
               </div>
 
               {/* Grid Items */}
-              <div
-                style={{ width: `${columns * 200}px`, borderRadius: "10px" }}
-              >
-                {states.map((state) => (
+              <div style={{ width: `${columns * 200}px`, borderRadius: "10px" }}>
+                {states.map((state, rowIndex) => (
                   <div key={state.id} className="flex gap-2 mb-2 rounded-md">
-                    {state.variants.map((variant, variantIndex) => (
-                      <React.Fragment key={variantIndex}>
-                        <div className="w-[200px] h-40 flex flex-col items-center justify-center bg-white relative rounded-md">
-                          {variant ? (
-                            <>
-                              <Image
-                                src={variant.image}
-                                alt={variant.title}
-                                layout="fill"
-                                objectFit="contain"
-                                className="p-2"
-                              />
-                              <button className="absolute top-1/2 bg-white rounded-full p-1 shadow-md">
+                    {state.variants.map((variant, colIndex) => (
+                      <div 
+                        key={colIndex}
+                        className="w-[200px] h-40 flex flex-col items-center justify-center bg-white relative rounded-md"
+                        onMouseEnter={() => setHoveredCell({ row: rowIndex, col: colIndex })}
+                        onMouseLeave={() => setHoveredCell(null)}
+                      >
+                        {variant ? (
+                          <>
+                            <Image
+                              src={variant.image}
+                              alt={variant.title}
+                              layout="fill"
+                              objectFit="contain"
+                              className="p-2"
+                            />
+                            {hoveredCell?.row === rowIndex && hoveredCell?.col === colIndex && (
+                              <button className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-full p-2 shadow-md">
                                 <FaEdit className="text-gray-600" />
                               </button>
-                            </>
-                          ) : (
-                            <button
-                              onClick={() => addDesign(state.id, variantIndex)}
-                              className="hover:bg-gray-200 text-gray-700 p-2 rounded border border-gray-300"
-                            >
-                              + Add Design
-                            </button>
-                          )}
-                        </div>
-                      </React.Fragment>
+                            )}
+                          </>
+                        ) : (
+                          <button
+                            onClick={() => addDesign(state.id, colIndex)}
+                            className="hover:bg-gray-200 text-gray-700 p-2 rounded border border-gray-300"
+                          >
+                            + Add Design
+                          </button>
+                        )}
+                      </div>
                     ))}
                   </div>
                 ))}
