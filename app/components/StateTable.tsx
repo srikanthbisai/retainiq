@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { FaFan, FaArrowLeft, FaEdit } from "react-icons/fa";
+import {  FaArrowLeft, FaEdit } from "react-icons/fa";
 import { HiOutlinePhotograph, HiShoppingBag } from "react-icons/hi";
 import { BsInfinity } from "react-icons/bs";
 import { PiDotsNineBold } from "react-icons/pi";
@@ -9,6 +9,7 @@ import { HiOutlineTrash } from "react-icons/hi2";
 import { useStateTable } from "../hooks/useStateTable";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { IoSettingsOutline } from "react-icons/io5";
+import { TbCarFan } from "react-icons/tb";
 
 const StateTable: React.FC = () => {
   const {
@@ -37,13 +38,13 @@ const StateTable: React.FC = () => {
         className="left bg-black flex flex-col items-center text-white justify-between text-2xl"
         style={{ width: "5%", height: "100vh", position: "fixed" }}
       >
-        <div className="top space-y-10 text-gray-400 text-3xl">
-          <FaFan className="mt-32 text-green-500" />
+        <div className="top space-y-10 text-gray-400 text-4xl">
+          <TbCarFan className="mt-32 text-green-500" />
           <HiOutlinePhotograph />
           <BsInfinity />
           <HiShoppingBag />
         </div>
-        <div className="space-y-10 pb-10">
+        <div className="space-y-10 pb-10 text-4xl">
           <IoSettingsOutline />
         </div>
       </div>
