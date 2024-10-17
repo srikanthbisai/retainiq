@@ -78,7 +78,7 @@ export const useStateTable = () => {
   };
 
   const deleteVariantColumn = (index: number) => {
-    if (index === 0 || index >= columns) return; // Don't delete primary column or non-existent columns
+    if (index === 0 || index >= columns) return; 
     setColumns((prev) => prev - 1);
     setStates(
       states.map((state) => ({

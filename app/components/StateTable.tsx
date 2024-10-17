@@ -60,7 +60,7 @@ const StateTable: React.FC = () => {
               {states.map((state, index) => (
                 <div
                   key={state.id}
-                  className="h-40 flex flex-col items-center justify-center text-center cursor-move"
+                  className="h-40 flex flex-col items-center justify-center text-center cursor-grab active:cursor-grabbing"
                   draggable
                   onDragStart={() => handleDragStart(index)}
                   onDragEnter={() => handleDragEnter(index)}
