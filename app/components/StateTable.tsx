@@ -42,6 +42,7 @@ const StateTable: React.FC = () => {
 
       <div className="right w-[95%]">
         {/* Header */}
+        <div className="h-20 w-full bg-black"></div>
         <div className="nav w-full p-10 text-3xl justify-between flex">
           <div className="left flex gap-10">
             <FaArrowLeft />
