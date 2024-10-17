@@ -10,6 +10,7 @@ The first step would be to run the command to download the node modules and all 
 ```
 
 To check for the functionalities of adding a row and column click on the row number and 3 dots or column heading in the column which would render a delete icon dynamically.
+We can upload image in any column of any row.
 
 
 First, run the development server:
