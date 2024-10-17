@@ -9,7 +9,7 @@ The first step would be to run the command to download the node modules and all 
 
 ```
 
-To check for the functionalities of adding a row and column click on the row number or 3 dots or column heading which would render a delete icon dynamically.
+To check for the functionalities of adding a row and column click on the row number and 3 dots or column heading in the column which would render a delete icon dynamically.
 
 
 First, run the development server:
