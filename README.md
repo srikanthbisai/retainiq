@@ -2,6 +2,14 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
+The first step would be to run the command to download the node modules and all the packages used 
+```bash
+
+ npm install
+
+```
+
+
 First, run the development server:
 
 ```bash
