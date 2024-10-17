@@ -4,6 +4,7 @@ import { FaFan, FaTrash, FaArrowLeft, FaEdit } from "react-icons/fa";
 import { HiOutlinePhotograph, HiShoppingBag } from "react-icons/hi";
 import { BsInfinity } from "react-icons/bs";
 import { PiDotsNineBold } from "react-icons/pi";
+import Image from 'next/image';
 
 interface FilterItem {
   text: string;
@@ -77,15 +78,15 @@ const StateTable: React.FC = () => {
     })));
   };
 
-  const handleDragStart = (e: React.DragEvent<HTMLDivElement>, position: number) => {
+  const handleDragStart = (_: React.DragEvent<HTMLDivElement>, position: number) => {
     dragItem.current = position;
   };
 
-  const handleDragEnter = (e: React.DragEvent<HTMLDivElement>, position: number) => {
+  const handleDragEnter = (_: React.DragEvent<HTMLDivElement>, position: number) => {
     dragOverItem.current = position;
   };
 
-  const handleDragEnd = (e: React.DragEvent<HTMLDivElement>) => {
+  const handleDragEnd = (_: React.DragEvent<HTMLDivElement>) => {
     if (dragItem.current !== null && dragOverItem.current !== null) {
       const copyStates = [...states];
       const dragItemContent = copyStates[dragItem.current];
@@ -155,7 +156,7 @@ const StateTable: React.FC = () => {
           {/* Left section: Numbers and Filters */}
           <div className="left w-[40%] flex">
             {/* Numbers Column */}
-            <div className="left-left numbersColumn w-[40%] pt-20 pb-10">
+            <div className="left-left numbersColumn w-[40%] pt-20 pb-10 space-y-2">
               {states.map((state, index) => (
                 <div
                   key={state.id}
@@ -233,7 +234,7 @@ const StateTable: React.FC = () => {
                       >
                         {variant ? (
                           <>
-                            <img src={variant.image} alt={variant.title} className="w-full h-full object-cover" />
+                            <Image src={variant.image} alt={variant.title} className="w-full h-full object-cover" />
                             <div className="absolute bottom-0 left-0 right-0 bg-white bg-opacity-75 p-2 text-xs">
                               {variant.title}
                             </div>
