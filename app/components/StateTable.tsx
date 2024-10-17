@@ -1,11 +1,13 @@
 "use client"
 import React from "react";
-import { FaFan, FaTrash, FaArrowLeft, FaEdit } from "react-icons/fa";
+import { FaFan,  FaArrowLeft, FaEdit } from "react-icons/fa";
 import { HiOutlinePhotograph, HiShoppingBag } from "react-icons/hi";
 import { BsInfinity } from "react-icons/bs";
 import { PiDotsNineBold } from "react-icons/pi";
 import Image from "next/image";
+import { HiOutlineTrash } from "react-icons/hi2";
 import { useStateTable } from "../hooks/useStateTable"; // Adjust this import path as needed
+import { BsThreeDotsVertical } from "react-icons/bs";
 
 const StateTable: React.FC = () => {
   const {
@@ -62,9 +64,7 @@ const StateTable: React.FC = () => {
         </div>
 
         <div className="w-[95%] mx-auto bg-gray-200 rounded-lg flex gap-4">
-          {/* Left section: Numbers and Filters */}
           <div className="left w-[40%] flex">
-            {/* Numbers Column */}
             <div className="left-left numbersColumn w-[40%] pt-20 pb-10 space-y-2">
               {states.map((state, index) => (
                 <div
@@ -76,10 +76,11 @@ const StateTable: React.FC = () => {
                   onDragEnd={handleDragEnd}
                   onDragOver={(e) => e.preventDefault()}
                   onClick={() => setSelectedRow(index)}
+
                 >
                   {selectedRow === index && (
-                    <FaTrash
-                      className="text-red-500 cursor-pointer mb-2 font-bold"
+                    <HiOutlineTrash
+                      className="text-red-500 cursor-pointer mb-2 font-bold text-2xl"
                       onClick={() => deleteState(state.id)}
                     />
                   )}
@@ -101,8 +102,8 @@ const StateTable: React.FC = () => {
             <div className="w-px bg-gray-300 mx-2"></div>
 
             {/* Filters Column */}
-            <div className="left-right FiltersColumn w-full mt-10 space-y-2 pl-4">
-              <h1 className="text-gray-700 mb-4">Product Filter</h1>
+            <div className="left-right FiltersColumn w-full mt-10 space-y-2 pl-4 ">
+              <h1 className="text-gray-700 mb-4 text-center font-medium">Product Filter</h1>
               {states.map((state) => (
                 <div
                   key={state.id}
@@ -155,18 +156,18 @@ const StateTable: React.FC = () => {
                 {Array.from({ length: columns }).map((_, index) => (
                   <React.Fragment key={index}>
                     <div 
-                      className="flex items-center justify-between p-2 w-[200px]"
+                      className="flex items-center justify-center p-2 w-[200px]"
                       onClick={() => setSelectedColumn(index)}
                     >
-                      <div className="flex items-center gap-3">
-                        <h1 className="text-gray-700">
-                          {index === 0 ? "Primary" : `Variant ${index + 1}`}
+                      <div className="flex text-center justify-center items-center gap-4">
+                        <h1 className="text-gray-700 font-medium">
+                          {index === 0 ? "Primary Variant" : `Variant ${index + 1}`}
                         </h1>
-                        <PiDotsNineBold className="text-gray-500" />
+                        <BsThreeDotsVertical className="text-gray-500" />
                       </div>
                       {selectedColumn === index && index > 0 && (
-                        <FaTrash
-                          className="text-red-500 cursor-pointer"
+                        <HiOutlineTrash
+                          className="text-red-500 cursor-pointer text-2xl font-bold"
                           onClick={(e) => {
                             e.stopPropagation();
                             deleteVariantColumn(index);
@@ -205,8 +206,10 @@ const StateTable: React.FC = () => {
                             </>
                           ) : (
                             <button
-                              onClick={() => addDesign(state.id, variantIndex)}
-                              className="hover:bg-gray-200 text-black p-2 rounded border border-gray-300"
+                              onClick={() => 
+                                addDesign(state.id, variantIndex)    
+                              }
+                              className="hover:bg-gray-200 text-gray-700 p-2 rounded border border-gray-300"
                             >
                               + Add Design
                             </button>
