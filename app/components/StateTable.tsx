@@ -50,6 +50,7 @@ const StateTable: React.FC = () => {
   const dragItem = useRef<number | null>(null);
   const dragOverItem = useRef<number | null>(null);
   const gridRef = useRef<HTMLDivElement | null>(null);
+  const [selectedRow, setSelectedRow] = useState<number | null>(null);
 
   useEffect(() => {
     if (gridRef.current) {
@@ -68,6 +69,7 @@ const StateTable: React.FC = () => {
 
   const deleteState = (id: number) => {
     setStates(states.filter(state => state.id !== id));
+    setSelectedRow(null);
   };
 
   const addVariantColumn = () => {
@@ -165,8 +167,11 @@ const StateTable: React.FC = () => {
                   onDragEnter={() => handleDragEnter(index)}
                   onDragEnd={handleDragEnd}
                   onDragOver={(e) => e.preventDefault()}
+                  onClick={() => setSelectedRow(index)}
                 >
-                  <FaTrash className="text-red-500 cursor-pointer mb-2" onClick={() => deleteState(state.id)} />
+                  {selectedRow === index && (
+                    <FaTrash className="text-red-500 cursor-pointer mb-2" onClick={() => deleteState(state.id)} />
+                  )}
                   <div className="flex items-center justify-center">
                     <span className="mr-2 text-2xl">{index + 1}</span>
                     <PiDotsNineBold className='text-2xl'/>
@@ -257,11 +262,18 @@ const StateTable: React.FC = () => {
             </div>
           </div>
 
-          {/* Plus Signs Section */}
-          <div className="flex flex-col justify-evenly items-center w-[10%]">
-            <div className="h-40 flex items-center justify-center">
-              <h1 className="text-4xl bg-gray-100 cursor-pointer p-2 rounded" onClick={addVariantColumn}>+</h1>
-            </div>
+          {/* Add Column Section */}
+          <div className="flex flex-col justify-start items-center w-[10%] pt-20">
+            {states.map((state) => (
+              <div key={state.id} className="h-40 flex items-center justify-center">
+                <h1 
+                  className="text-4xl bg-gray-100 cursor-pointer p-2 rounded" 
+                  onClick={addVariantColumn}
+                >
+                  +
+                </h1>
+              </div>
+            ))}
           </div>
         </div>
       </div>
